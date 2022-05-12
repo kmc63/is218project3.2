@@ -9,7 +9,7 @@ from werkzeug.security import generate_password_hash
 from app.auth.decorators import admin_required
 from app.auth.forms import login_form, register_form, profile_form, security_form, user_edit_form, create_user_form
 from app.db import db
-from app.db.models import User, Location, location_user
+from app.db.models import User, Location
 from flask_mail import Message
 
 auth = Blueprint('auth', __name__, template_folder='templates')
@@ -86,15 +86,8 @@ def logout():
 def dashboard(page):
     page = page
     per_page = 1000
-    #pagination = Location.query.filter_by(users=current_user.id).paginate(page, per_page, error_out=False)
-    #pagination = Location.query.all(users=current_user.id).paginate(page, per_page, error_out=False)
 
-    #pagination = db.session.query(Location, User).filter(location_user.location_id == Location.id,
-            #                                   location_user.user_id == User.id).order_by(Location.location_id).all()
-
-    #pagination = User.query.join(location_user).filter(location_user.user_id == current_user.id).paginate()
-
-    data = current_user.locations
+    data = current_user.songs
 
     try:
         return render_template('dashboard.html',data=data)

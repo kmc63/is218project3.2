@@ -46,6 +46,8 @@ def songs_upload():
         current_user.songs = list_of_songs
         db.session.commit()
 
+        log.info(f"{len(list_of_songs)} Song(s) Uploaded by current user {current_user}!")
+
         return redirect(url_for('songs.songs_browse'))
 
     try:
