@@ -45,11 +45,11 @@ def test_csv_upload_successful(application, client, add_user):
     application.test_client_class = FlaskLoginClient
     test_user = User.query.get(1)
     with application.test_client(user=test_user) as client:
-        response = client.get('/transactions/upload')
+        response = client.get('/songs/upload')
         assert response.status_code == 200
 
 def test_csv_upload_unsuccessful(application, client):
     application.test_client_class = FlaskLoginClient
     with application.test_client(user="") as client:
-        response = client.get('/transactions/upload')
+        response = client.get('/songs/upload')
         assert response.status_code == 302
